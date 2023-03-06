@@ -22,7 +22,10 @@ class TypeSeeder extends Seeder
             $type = new Type();
             $type->name = $types[$i];
             $type->color = $faker->unique()->hexColor();
+            $type->slug = Str::slug($types[$i]);
             $type->save();
+            $type->slug = $type->slug . "-$type->id";
+            $type->update();
         }
     }
 }

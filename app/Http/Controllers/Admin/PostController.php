@@ -121,4 +121,17 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index');
     }
+
+    /**
+     * Clears the linked category of this post.
+     *
+     * @param Post $post
+     * @return void
+     */ 
+    public function clearPost(Post $post){
+        $type = $post->type;
+        $post->type_id = null;
+        $post->update();
+        return redirect()->route('admin.types.show', compact('type'));
+    }
 }

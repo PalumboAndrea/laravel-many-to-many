@@ -17,6 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.posts.index') }}">Posts List</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.types.index') }}">Types List</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

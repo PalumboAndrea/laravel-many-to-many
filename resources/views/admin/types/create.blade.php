@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
@@ -6,7 +6,7 @@
         <div class="row d-flex align-items-center justify-content-between">
             <div class="col-10">
                 <h1 class="m-0">
-                    Modifica l'elemento
+                    Crea un nuovo elemento!
                 </h1>
             </div>
             @include('admin.posts.partials.backHome')
@@ -22,6 +22,6 @@
         @endif
     </div>
 
-    @include('admin.posts.partials.form', ['route' => 'admin.posts.update', 'method' => 'PUT', 'post' => $post])
+    @include('admin.posts.partials.form', ['route' => 'admin.posts.store', 'method' => 'POST', 'post' => $post])
 
 @endsection
