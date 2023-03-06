@@ -9,7 +9,7 @@
                     Modifica l'elemento
                 </h1>
             </div>
-            @include('admin.partials.backHome')
+            @include('admin.posts.partials.backHome')
         </div>
         @if ($errors->any())
             <div class="alert alert-danger mt-4">
@@ -22,6 +22,6 @@
         @endif
     </div>
 
-    @include('admin.partials.form', ['route' => 'admin.posts.update', 'method' => 'PUT', 'post' => $post])
+    @include('admin.posts.partials.form', ['route' => 'admin.posts.update', 'method' => 'PUT', 'post' => $post])
 
 @endsection
