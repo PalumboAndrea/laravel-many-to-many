@@ -1,42 +1,26 @@
 <div class="container">
-    <form action=" {{ route($route, $post->id) }} " method="POST" enctype="multipart/form-data">
+    <form action=" {{ route($route, $type->id) }} " method="POST" enctype="multipart/form-data">
         @csrf
         @method($method)
         <h5 class="mb-3">
-        Author: <span class="fw-semibold">{{ Auth::user()->name }} </span>
+            Crea un nuovo tipo:
         </h5>
+         
+        <div class="container">
+            <div class="row">
+                <div class="mb-3 col-4 p-0">
+                    <label class="form-label text-nowrap m-0 align-middle">Nome tipo:</label>
+                    <input type="text" class="form-control" placeholder="add name" name="name" value="{{ old('name') ?? $type->name  }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-1 d-flex p-0">
+                    <label class="form-label">Colore:</label>
+                    <input type="color" class="form-control p-1 ms-2" placeholder="add color" name="color" value="{{ old('color') ?? $type->color }}">
+                </div>
+            </div>
+        </div>
 
-        <div class="mb-3">
-            <label class="form-label">Tipo</label>
-            <select class="form-control" id="post_category" name="type_id" >
-                @foreach ($types as $type)
-                    <option value="{{ $type->id }}"
-                        {{ old('type_id', $post->type_id) ==  $type->id ? 'selected' : '' }}>
-                        <span >
-                            {{ $type->name }}
-                        </span>
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        
-        <div class="mb-3">
-            <label class="form-label">Titolo</label>
-            <input type="text" class="form-control" placeholder="add title" name="title" value="{{ old('title') ?? $post->title  }}">
-        </div>
-        
-        <div class="mb-3">
-            <label class="form-label">Testo</label>
-            <textarea class="form-control" placeholder="Leave a content here" name="content">{{ $post->content ?? old('content') }}</textarea>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Data</label>
-            <input type="date" class="form-control" placeholder="add date" name="post_date" value="{{ old('post_date') ?? $post->post_date }}">
-        </div>
-        <div class="mb-3">
-            <label for="formFile" class="form-label">Carica una foto</label>
-            <input class="form-control" type="file" id="formFile" name="image_path" value="{{ old('image_path') ?? $post->image_path }}">
-        </div>
-        <button type="submit" class="btn btn-primary">{{ $route == 'admin.posts.update' ? 'Modifica post' : 'Crea un nuovo post'  }}</button>
+        <button type="submit" class="btn btn-primary">{{ $route == 'admin.types.update' ? 'Modifica tipo' : 'Crea un nuovo tipo'  }}</button>
     </form>
 </div>

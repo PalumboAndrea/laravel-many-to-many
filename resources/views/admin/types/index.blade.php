@@ -1,8 +1,19 @@
 @extends('layouts.admin')
 
+@section('head')
+    @vite(['resources/js/deleteForm.js'])
+@endsection
+
 @section('content')
 
 <div class="container mt-4 admin-index text-center">
+
+    @if (session('success-message'))
+        <div class="alert alert-{{ session('message_class') }} mb-3">
+            {{ session('success-message') }}
+        </div>
+    @endif
+
     <table class="table table-hover">
         <thead>
             <tr>

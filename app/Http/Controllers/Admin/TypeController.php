@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Type;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 
 class TypeController extends Controller
 {
@@ -37,9 +39,20 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Type $type)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255|min:3|unique:types,name',
+            'color' => 'required'
+        ]);
+        $data['slug'] = Str::slug($data['name']);
+        $type = new Type();
+        $type->fill($data);
+        $type->save();
+        $type->slug = $type->slug . "-$type->id";
+        $type->update();
+
+        return redirect()->route('admin.types.index', compact('type'));
     }
 
     /**
@@ -68,22 +81,33 @@ class TypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Type $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Type $type)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'min:3', Rule::unique('types')->ignore($type->id)],
+            'color' => 'required',
+        ],
+        [
+            'name' => 'Inserire un nome',
+            'color' => 'Inserire un colore',
+        ]);
+        $data['slug'] = Str::slug($data['name']."-$type->id");
+        $type->update($data);
+        return redirect()->route('admin.types.index', compact('type'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Type $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return redirect()->route('admin.types.index')->with('success-message', "The type  \"$type->name\" has been removed correctly")->with('message_class', 'success');
     }
 }

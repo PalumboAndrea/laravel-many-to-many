@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
@@ -9,7 +9,7 @@
                     Crea un nuovo elemento!
                 </h1>
             </div>
-            @include('admin.posts.partials.backHome')
+            @include('admin.types.partials.backHome')
         </div>
         @if ($errors->any())
             <div class="alert alert-danger mt-4">
@@ -22,6 +22,6 @@
         @endif
     </div>
 
-    @include('admin.posts.partials.form', ['route' => 'admin.posts.store', 'method' => 'POST', 'post' => $post])
+    @include('admin.types.partials.form', ['route' => 'admin.types.store', 'method' => 'POST', 'type' => $type])
 
 @endsection
