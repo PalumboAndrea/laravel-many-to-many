@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('head')
+    @vite(['resources/js/deleteForm.js'])
+@endsection
+
 @section('content')
 
 <div class="container mt-4 admin-index">
