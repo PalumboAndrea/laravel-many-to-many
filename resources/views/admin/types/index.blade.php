@@ -34,15 +34,17 @@
                 <td class="align-middle">{{ count($type->posts) }}</td>
                 <td class="align-middle">{{ $type->color }}</td>
                 <td>
-                    <a class="btn btn-primary m-1" href=" {{ route('admin.types.show', $type->id) }} ">Show</a>
-                    <a class="btn btn-warning m-1" href=" {{ route('admin.types.edit', $type->id) }} ">Edit</a>
-                    <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" class="form-deleter" data-element-name="{{ $type->name }}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger m-1">
-                            Delete
-                        </button>
-                    </form>
+                    <div class="btn-container">
+                        <a class="btn btn-primary m-1" href=" {{ route('admin.types.show', $type->id) }} ">Show</a>
+                        <a class="btn btn-warning m-1" href=" {{ route('admin.types.edit', $type->id) }} ">Edit</a>
+                        <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" class="form-deleter" data-element-name="{{ $type->name }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger m-1">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach

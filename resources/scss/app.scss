@@ -3,3 +3,19 @@
 img{
     max-width: 100%;
 }
+
+.admin-index{
+    th{
+        text-align: center;
+    }
+    td{
+        max-height: 200px;
+        text-overflow: ellipsis;
+    }
+
+    .btn-container{
+        display: flex;
+        justify-content: center;
+    }
+    
+}

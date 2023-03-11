@@ -7,9 +7,14 @@
             {{ $post->author }} --- <span style="color: {{ $post->type->color }}">{{ $post->type->name }}</span>
         </div>
         <div class="card-body">
-            <h5 class="card-title text-center"> {{ $post->title }} </h5>
+            <h5 class="card-title text-center m-0"> {{ $post->title }} </h5>
+            <div class="my-3">
+                @foreach ($post->technologies as $tech)
+                    <span class="badge rounded-pill py-2 px-3" style="background-color:{{$tech->color}}">{{$tech->name}}</span>
+                @endforeach
+            </div>
             <div class="card-image mb-5">
-                @if ( $post->isImageAUrl())
+                @if ( $post->isImageAUrl()) 
                     <img src="{{ $post->image_path }}"
                 @else
                     <img src="{{ asset('storage/' . $post->image_path ) }}"
