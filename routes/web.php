@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [HomeController::class, 'index'])->name('guests.index');
+
 Route::prefix('guest')->group(function(){
-    Route::resource('comics', HomeController::class);
+    Route::resource('/', HomeController::class);
 });
 
 Route::get('/dashboard', function () {

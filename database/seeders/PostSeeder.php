@@ -26,7 +26,7 @@ class PostSeeder extends Seeder
             $newPost->slug = Str::slug($newPost->title);
             $newPost->author = $faker->name();
             $newPost->content = $faker->realTextBetween(200, 400);
-            $newPost->post_date = $faker->dateTimeThisYear();
+            $newPost->post_date = $faker->dateTimeThisDecade();
             $newPost->image_path = $faker->imageUrl(640, 480, 'animals', true);
             $newPost->save();
         }

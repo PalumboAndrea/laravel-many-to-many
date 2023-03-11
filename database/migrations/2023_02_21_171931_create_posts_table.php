@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title', 200);
             $table->string('author', 50);
             $table->text('content');
-            $table->dateTime('post_date');
+            $table->date('post_date');
             $table->timestamps();
         });
     }

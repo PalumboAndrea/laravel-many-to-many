@@ -12,9 +12,6 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Home') }}</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.posts.index') }}">Posts List</a>
                 </li>
                 <li class="nav-item">
