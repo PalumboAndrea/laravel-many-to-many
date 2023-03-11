@@ -19,3 +19,19 @@ img{
     }
     
 }
+
+.navbar-container{
+    height: 70px;
+
+    .portfolio-title{
+        font-family: 'Sono', sans-serif;
+    }
+    background-image: url('../../storage/app/public/uploads/cover.png');
+
+    .admin-name{
+        background-color: rgb(250,211,53);
+        border: 1px solid rgb(180,152,38);
+        border-radius: 20px;
+        padding: 3px;
+    }
+}
