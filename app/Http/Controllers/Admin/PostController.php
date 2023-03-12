@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -20,6 +21,7 @@ class PostController extends Controller
         'content' => 'required',
         'image_path' => 'required|image',
         'type_id' => 'required|exists:types,id',
+        'technologies' => 'array|exists:technologies,id'
     ];
     /**
      * Display a listing of the resource.
@@ -39,7 +41,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create', [ 'post' => new Post(), 'types' => Type::all() ]);
+        return view('admin.posts.create', [ 'post' => new Post(), 'types' => Type::all(), 'technologies' => Technology::all() ]);
 
     }
 
@@ -59,6 +61,7 @@ class PostController extends Controller
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->save();
+        $newPost->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.posts.show', $newPost)->with('msg', "Post $newPost->title has been created succesfully");
     }
@@ -82,7 +85,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', [ 'post' => $post, 'types' => Type::all()]);
+        return view('admin.posts.edit', [ 'post' => $post, 'types' => Type::all(), 'technologies' => Technology::all()]);
     }
 
     /**
@@ -99,6 +102,7 @@ class PostController extends Controller
             'post_date' => 'required',
             'content' => 'required',
             'type_id' => 'required|exists:types,id',
+            'technologies' => 'array|exists:technologies,id',
         ],
         [
             'title' => 'Inserire un titolo',
@@ -106,7 +110,18 @@ class PostController extends Controller
             'content' => 'Inserire un testo',
             'type_id' => 'Inserire un tipo',
         ]);
+
+        if ($request->hasFile('image')){
+
+            if (!$post->isImageAUrl()){
+                Storage::delete($post->image_path);
+            }
+
+            $data['image_path'] =  Storage::put('/', $data['image_path']);
+        }
+
         $post->update($data);
+        $post->technologies()->sync($data['technologies'] ?? []);
         return redirect()->route('admin.posts.show', compact('post'));
     }
 
@@ -119,6 +134,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         Storage::disk('public')->delete($post->image_path);
+        $post->technologies()->sync([]);
         $post->delete();
         return redirect()->route('admin.posts.index')->with('success-message', "The post  \"$post->title\" has been removed correctly")->with('message_class', 'success');;
     }

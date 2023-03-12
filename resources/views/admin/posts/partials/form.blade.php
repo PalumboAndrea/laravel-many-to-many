@@ -19,6 +19,20 @@
                 @endforeach
             </select>
         </div>
+
+        <div class="mb-3 tags d-flex align-items-center justify-content-between">
+            @foreach ($technologies as $tech)
+            <div class="single-tag d-flex align-items-center">
+                <input type="checkbox" class="form-check-input" name="technologies[]" value="{{ $tech->id }}"
+                @if ($errors->any())
+                    @checked(in_array($tech->id, old('technologies',[])))
+                @else
+                    @checked($post->technologies->contains($tech->id))
+                @endif>
+                <label class="form-check-label ms-2">{{ $tech->name }}</label>
+            </div>
+            @endforeach
+        </div>
         
         <div class="mb-3">
             <label class="form-label">Titolo</label>

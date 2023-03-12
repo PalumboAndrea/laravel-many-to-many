@@ -20,9 +20,10 @@
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Content</th>
+            <th scope="col">Technologies</th>
             <th scope="col">Date</th>
             <th scope="col" class="col-3 text-center">
-                <a class="btn btn-primary ms-auto" href="{{ route('admin.posts.create') }}">Create new product</a>
+                <a class="btn btn-primary ms-auto" href="{{ route('admin.posts.create') }}">Create new post</a>
             </th>
             </tr>
         </thead>
@@ -30,10 +31,24 @@
             @foreach ($posts as $post)
             <tr>
                 <th scope="row" class="align-middle">{{ $post->id }}</th>
-                <td class="align-middle text-nowrap">{{ $post->type->name ?? 'No type' }}</td>
+                
+                <td class="align-middle text-nowrap">
+                    <span style="color: {{ $post->type->color }}">{{ ucfirst(trans($post->type->name)) ?? 'No type' }}</span>
+                </td>
                 <td class="align-middle">{{ $post->title }}</td>
                 <td class="align-middle">{{ $post->author }}</td>
                 <td class="align-middle overflow-scroll">{{ $post->content }}</td>
+                <td class="align-middle">
+                    @forelse ($post->technologies as $tech)
+                        @if ($loop->index != (count($post->technologies)-1))
+                        <span class="badge rounded-pill py-2 px-2 my-1" style="background-color:{{$tech->color}}">{{$tech->name}}</span>
+                        @else
+                        <span class="badge rounded-pill py-2 px-2 my-1" style="background-color:{{$tech->color}}">{{$tech->name}}</span>
+                        @endif
+                    @empty
+                        No technologies
+                    @endforelse
+                </td>
                 <td class="align-middle text-nowrap">{{ $post->post_date }}</td>
                 <td class="align-middle text-center">
                     <div class="btn-container">

@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mt-4">
+<div class="container mt-4 mb-5">
     <div class="card m-auto w-75 text-center">
         <div class="card-header fw-bold">
-            {{ $post->author }} --- <span style="color: {{ $post->type->color }}">{{ $post->type->name }}</span>
+            {{ $post->author }} --- <span style="color: {{ $post->type->color }}">{{ ucfirst(trans($post->type->name)) }}</span>
         </div>
         <div class="card-body">
             <h5 class="card-title text-center m-0"> {{ $post->title }} </h5>
