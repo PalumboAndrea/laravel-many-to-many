@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm navbar-container">
     <div class="container">
         <h2 class="me-2 my-0 portfolio-title">
-            Andrea Palumbo
+            <a href="{{ route('admin.dashboard') }}" class="text-decoration-none" style="color:black">Andrea Palumbo</a>
         </h1>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
