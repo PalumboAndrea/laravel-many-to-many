@@ -12,8 +12,11 @@
                 <li class="nav-item mx-2">
                     <a class="nav-link admin-name" href="{{ route('admin.posts.index') }}">Posts List</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <a class="nav-link admin-name" href="{{ route('admin.types.index') }}">Types List</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link admin-name" href="{{ route('admin.technologies.index') }}">Technologies List</a>
                 </li>
             </ul>
 

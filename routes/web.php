@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController as DashboardController;
 use App\Http\Controllers\Admin\PostController as PostController;
 use App\Http\Controllers\Guest\HomeController as HomeController;
 use App\Http\Controllers\Admin\TypeController as TypeController;
+use App\Http\Controllers\Admin\TechnologyController as TechnologyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,8 +41,10 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/posts', PostController::class);
-        Route::delete('/posts/{post}/clear-post',  [PostController::class, 'clearPost'])->name('posts.clearPost');
+        Route::delete('/posts/{post}/clear-post',  [PostController::class, 'clearType'])->name('posts.clearType');
+        Route::delete('/posts/{post}/clear-technology',  [PostController::class, 'clearTechnology'])->name('posts.clearTechnology');
         Route::resource('/types', TypeController::class);
+        Route::resource('/technologies', TechnologyController::class);
     });
 
 require __DIR__.'/auth.php';

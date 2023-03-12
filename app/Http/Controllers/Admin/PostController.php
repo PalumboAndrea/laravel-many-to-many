@@ -145,10 +145,15 @@ class PostController extends Controller
      * @param Post $post
      * @return void
      */ 
-    public function clearPost(Post $post){
+    public function clearType(Post $post){
         $type = $post->type;
         $post->type_id = null;
         $post->update();
         return redirect()->route('admin.types.show', compact('type'));
+    }
+
+    public function clearTechnology(Post $post){
+        $post->sync([]);
+        return redirect()->route('admin.technologies.index');
     }
 }

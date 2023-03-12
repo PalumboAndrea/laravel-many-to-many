@@ -3,10 +3,10 @@
 @section('content')
 <div class="container my-4">
     <h2 class="m-3 p-2 fw-bold text-center">
-        Posts in {{  $type->name }} type
+        Posts in {{  $technology->name }} type
     </h2>
 
-    @foreach ($type->posts as $post)
+    @foreach ($technology->posts as $post)
     <div class="card text-center my-4">
         <div class="card-header">
             {{ $post->author }}
@@ -24,7 +24,7 @@
                 @method('DELETE')
 
                 <button type="submit" class="btn btn-sm btn-danger">
-                    Remove post from {{ $type->name }} type
+                    Remove post from {{ $technology->name }} technology
                 </button>
             </form>
         </div>
