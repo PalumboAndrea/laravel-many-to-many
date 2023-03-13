@@ -8,11 +8,7 @@
 
 <div class="container mt-4 admin-index text-center">
 
-    @if (session('success-message'))
-        <div class="alert alert-{{ session('message_class') }} mb-3">
-            {{ session('success-message') }}
-        </div>
-    @endif
+    @include('layouts.includes.confirmMessage')
 
     <table class="table table-hover">
         <thead>

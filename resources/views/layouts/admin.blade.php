@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Usando Vite -->
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/js/deleteForm.js'])
     @yield('head')
 </head>
 
@@ -28,7 +28,7 @@
 
         @include('layouts.includes.header')
 
-        <main class="">
+        <main>
             @yield('content')
         </main>
     </div>
