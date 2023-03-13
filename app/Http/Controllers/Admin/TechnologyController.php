@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Technology;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class TechnologyController extends Controller
 {
@@ -26,7 +28,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create', [ 'technology' => new Technology() ]);
     }
 
     /**
@@ -37,51 +39,73 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255|min:3|unique:types,name',
+            'color' => 'required'
+        ]);
+        $data['slug'] = Str::slug($data['name']);
+        $technology = new Technology();
+        $technology->fill($data);
+        $technology->save();
+        $technology->slug = $technology->slug . "-$technology->id";
+        $technology->update();
+
+        return redirect()->route('admin.technologies.index', compact('technology'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Technology $technology
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Technology $technology)
     {
-        //
+        return view('admin.technologies.show', compact('technology'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Technology $technology
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Technology $technology)
     {
-        //
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Technology $technology
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Technology $technology)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'min:3', Rule::unique('technologies')->ignore($technology->id)],
+            'color' => 'required',
+        ],
+        [
+            'name' => 'Inserire un nome',
+            'color' => 'Inserire un colore',
+        ]);
+        $data['slug'] = Str::slug($data['name']."-$technology->id");
+        $technology->update($data);
+        return redirect()->route('admin.technologies.index', compact('technology'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Technology $technology
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+        return redirect()->route('admin.technologies.index')->with('success-message', "The technology  \"$technology->name\" has been removed correctly")->with('message_class', 'success');
     }
 }

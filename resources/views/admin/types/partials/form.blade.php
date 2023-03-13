@@ -3,7 +3,7 @@
         @csrf
         @method($method)
         <h5 class="mb-3">
-            Crea un nuovo tipo:
+            Create a new type:
         </h5>
          
         <div class="container">
@@ -21,6 +21,6 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">{{ $route == 'admin.types.update' ? 'Modifica tipo' : 'Crea un nuovo tipo'  }}</button>
+        <button type="submit" class="btn btn-primary">{{ $route == 'admin.types.update' ? 'Modify type' : 'Create the new type'  }}</button>
     </form>
 </div>

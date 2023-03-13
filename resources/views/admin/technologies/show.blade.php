@@ -3,7 +3,7 @@
 @section('content')
 <div class="container my-4">
     <h2 class="m-3 p-2 fw-bold text-center">
-        Posts in {{  $technology->name }} type
+        Posts in {{  $technology->name }} technology
     </h2>
 
     @foreach ($technology->posts as $post)
@@ -19,7 +19,7 @@
                 {{ $post->content }}
             </p>
 
-            <form action="{{ route('admin.posts.clearType', $post) }}" method="POST" class="d-inline-block form-deleter" data-element-name='"{{ $post->title }}"'>
+            <form action="{{ route('admin.posts.clearTechnology', $post) }}" method="POST" class="d-inline-block form-deleter" data-element-name='"{{ $post->title }}"'>
                 @csrf
                 @method('DELETE')
 
