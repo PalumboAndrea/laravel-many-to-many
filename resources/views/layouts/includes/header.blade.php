@@ -10,13 +10,13 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item mx-2">
-                    <a class="nav-link admin-name" href="{{ route('admin.posts.index') }}">Posts List</a>
+                    <a class="nav-link admin-name {{ str_contains(Route::current()->getName(), 'posts') ? 'active' : ''}}" href="{{ route('admin.posts.index') }}">Posts List</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link admin-name" href="{{ route('admin.types.index') }}">Types List</a>
+                    <a class="nav-link admin-name {{ str_contains(Route::current()->getName(), 'types') ? 'active' : ''}}" href="{{ route('admin.types.index') }}">Types List</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link admin-name" href="{{ route('admin.technologies.index') }}">Technologies List</a>
+                    <a class="nav-link admin-name {{ str_contains(Route::current()->getName(), 'technologies') ? 'active' : ''}}" href="{{ route('admin.technologies.index') }}">Technologies List</a>
                 </li>
             </ul>
 

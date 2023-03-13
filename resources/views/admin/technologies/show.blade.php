@@ -18,6 +18,7 @@
             <p class="card-text mb-4">
                 {{ $post->content }}
             </p>
+            @dump($technology->id)
 
             <form action="{{ route('admin.posts.clearTechnology', $post) }}" method="POST" class="d-inline-block form-deleter" data-element-name='"{{ $post->title }}"'>
                 @csrf

@@ -10,7 +10,6 @@ use App\Models\Technology;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -153,7 +152,7 @@ class PostController extends Controller
     }
 
     public function clearTechnology(Post $post){
-        $post->sync([]);
+        $post->technologies()->sync([]);
         return redirect()->route('admin.technologies.index');
     }
 }

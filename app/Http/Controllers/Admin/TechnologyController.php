@@ -40,7 +40,7 @@ class TechnologyController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255|min:3|unique:types,name',
+            'name' => 'required|string|max:255|min:3|unique:technologies,name',
             'color' => 'required'
         ]);
         $data['slug'] = Str::slug($data['name']);
@@ -105,6 +105,7 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
+        $technology->posts()->sync([]);
         $technology->delete();
         return redirect()->route('admin.technologies.index')->with('success-message', "The technology  \"$technology->name\" has been removed correctly")->with('message_class', 'success');
     }
