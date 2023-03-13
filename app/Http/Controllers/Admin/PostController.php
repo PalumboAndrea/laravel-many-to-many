@@ -151,8 +151,8 @@ class PostController extends Controller
         return redirect()->route('admin.types.show', compact('type'));
     }
 
-    public function clearTechnology(Post $post){
-        $post->technologies()->sync([]);
+    public function clearTechnology(Post $post, $technologyId){
+        $post->technologies()->detach([$technologyId]);
         return redirect()->route('admin.technologies.index');
     }
 }

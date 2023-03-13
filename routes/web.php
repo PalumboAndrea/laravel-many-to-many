@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('/posts', PostController::class);
         Route::delete('/posts/{post}/clear-post',  [PostController::class, 'clearType'])->name('posts.clearType');
-        Route::delete('/posts/{post}/clear-technology',  [PostController::class, 'clearTechnology'])->name('posts.clearTechnology');
+        Route::delete('/posts/{post}/technologies/{technology}',  [PostController::class, 'clearTechnology'])->name('posts.clearTechnology');
         Route::resource('/types', TypeController::class);
         Route::resource('/technologies', TechnologyController::class);
     });

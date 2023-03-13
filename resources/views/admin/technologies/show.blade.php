@@ -20,7 +20,7 @@
             </p>
             @dump($technology->id)
 
-            <form action="{{ route('admin.posts.clearTechnology', $post) }}" method="POST" class="d-inline-block form-deleter" data-element-name='"{{ $post->title }}"'>
+            <form action="{{ route('admin.posts.clearTechnology', [$post, $technology->id]) }}" method="POST" class="d-inline-block form-deleter" data-element-name='"{{ $post->title }}"'>
                 @csrf
                 @method('DELETE')
 
